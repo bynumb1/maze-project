@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Grid Layout</title>
+	<link href="layout.css" rel="stylesheet" />
+	<script src="mazemaker.js" type="text/javascript"></script>
+</head>
+<body onload="drawMaze()">
+</div>
+</div>
+<div id=wrapper>
+<div id="options-column">
+	<p> Maze Generation can be thought of as depth first search on a graph. Simply choose a random
+	wall to eliminate and mark the next position of the grid as visited. When all squares have been
+	visited the maze is complete.</p>
+<p>
+<label>Bias:</label><input type="text" value=0.0 />
+<select name="Generation Algorithms">
+	<option value="dfs">Depth First Search</option>
+	<option value="prims">Randomized Prim's</option>
+	<option value="krus">Randomized Kruskal's</option>
+
+</select>
+</p>
+<button id="run">Run</button>
+<button id="clear">Clear</button>
+<p id="pos"></p>	
+</div>
+<div id="maze-container">
+<canvas id="maze" width="601" height="601"></canvas>
+<script>
+	var canvas=document.getElementById("maze");
+	canvas.addEventListener("click", drawStartingCursor , false);
+
+	var btn  = document.getElementById("clear");
+	btn.addEventListener("click", clearMaze, false);
+
+	var rbtn = document.getElementById("run");
+	rbtn.addEventListener("click", dfs, false);
+</script>
+</div>
+</div>
+</body>
+</html>
