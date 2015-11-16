@@ -18,7 +18,7 @@ function Cell(x, y) {
  */
 
 function buildMaze() {
-	console.log("buildMaze enter");
+	console.log("buildMaze enter"); 
 	var a = new Array();
 	for(x=0; x<600; x+=10) {
 		for(y=0; y<600; y+=10) {
@@ -220,12 +220,21 @@ function hasUnvisitedNeighbors(cell) {
  * bound to run button
   */
 function dfs(e) {
+	timer = setInterval(stepDFS, 5);
+	if(allCellsVisited()) { 
+		clearInterval(timer);
+	}
+	return timer;
+
+}
+
+function stepDFS() {
 	
-  	var direction;
-  	var lookupKey;
+  	var direction,
+  	    lookupKey;
   	/* First mark cursor cell visited */
   	console.log("entered dfs routine");
-  	while(!allCellsVisited()) { 		
+  	if(!allCellsVisited()) { 		
   		cursorCell.visited=true;
   		if(hasUnvisitedNeighbors(cursorCell)) {
   			var madeMove = false;
