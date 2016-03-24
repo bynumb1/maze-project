@@ -1,6 +1,7 @@
 var maze = buildMaze();
 var cursorCell;
 var startingCursor=false;
+var timer=null;
 
 function Cell(x, y) {
 	this.xPos = x;
@@ -129,6 +130,9 @@ function removeCursor(cell) {
  */
 function clearMaze(e) {
 	console.log("Enter clearMaze");
+    if(timer!==null) {
+        clearInterval(timer);
+    }
 	var canvas = document.getElementById("maze");
 	var context = canvas.getContext('2d');
 	console.log("Obtained canvase element:"+ canvas.width+"x"+canvas.height);
@@ -208,7 +212,7 @@ function hasUnvisitedNeighbors(cell) {
 			var key = neighborKeyArray[item];
 			if(key!=null || key!=undefined) {
 				console.log("Key value is: "+ key);
-				if(maze[key].visited==false) {
+				if(maze[key].visited===false) {
 					return true;
 				}
 			}
@@ -221,9 +225,6 @@ function hasUnvisitedNeighbors(cell) {
   */
 function dfs(e) {
 	timer = setInterval(stepDFS, 5);
-	if(allCellsVisited()) { 
-		clearInterval(timer);
-	}
 	return timer;
 
 }
@@ -244,7 +245,7 @@ function stepDFS() {
 			console.log("cusorCell has unvisited neighbors");
 			console.log("Random is: "+direction);
 			console.log(cursorCell);
-	  		if(direction==0 && cursorCell.yPos-10>=0) {
+	  		if(direction===0 && cursorCell.yPos-10>=0) {
 	  			lookupKey=cursorCell.xPos+":"+(cursorCell.yPos-10);
 	  			var neighbor = maze[lookupKey];
 	  			if(neighbor.visited===false) {
@@ -254,7 +255,7 @@ function stepDFS() {
 	  				madeMove=true;
 	  			}
 	  		}
-	  		if(direction==1 && cursorCell.xPos+10<=590) {
+	  		if(direction===1 && cursorCell.xPos+10<=590) {
 	  			lookupKey=(cursorCell.xPos+10)+":"+cursorCell.yPos;
 	  			var neighbor = maze[lookupKey];
 	  			if(neighbor.visited===false) {
@@ -264,7 +265,7 @@ function stepDFS() {
 	  				madeMove=true;
 	  			}
 	  		} 
-	  		if(direction==2 && cursorCell.yPos+10<=590) {
+	  		if(direction===2 && cursorCell.yPos+10<=590) {
 	  			lookupKey=cursorCell.xPos+":"+(cursorCell.yPos+10);
 	  			var neighbor = maze[lookupKey];
 	  			if(neighbor.visited===false) {
@@ -274,7 +275,7 @@ function stepDFS() {
 	  				madeMove=true;  			
 	  			}
 	  		} 
-	  		if(direction==3 && cursorCell.xPos-10>=0) {
+	  		if(direction===3 && cursorCell.xPos-10>=0) {
 	  			lookupKey=(cursorCell.xPos-10)+":"+cursorCell.yPos;
 	  			var neighbor = maze[lookupKey];
 	  			if(neighbor.visited===false) {
@@ -311,5 +312,8 @@ function allCellsVisited() {
 			}
 		}
 	}
+    if(timer) {
+        clearInterval(timer);
+    }
 	return true;
 }
