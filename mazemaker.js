@@ -224,7 +224,7 @@ function hasUnvisitedNeighbors(cell) {
  * bound to run button
   */
 function dfs(e) {
-	timer = setInterval(stepDFS, 5);
+	timer = setInterval(stepDFS, 3);
 	return timer;
 
 }

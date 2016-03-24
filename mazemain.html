@@ -15,13 +15,21 @@
 	wall to eliminate and mark the next position of the grid as visited. When all squares have been
 	visited the maze is complete.</p>
 <p>
-<label>Bias:</label><input type="text" value=0.0 />
+<label> Bias:
+<select name="Bias">
+    <option value="horozontial">Horozontial</option>
+    <option value="vertical">Vertical</option>
+</select>
+</label>
+<label> Algorithm: 
 <select name="Generation Algorithms">
 	<option value="dfs">Depth First Search</option>
 	<option value="prims">Randomized Prim's</option>
 	<option value="krus">Randomized Kruskal's</option>
 
 </select>
+</label>
+
 </p>
 <button id="run">Run</button>
 <button id="clear">Clear</button>
