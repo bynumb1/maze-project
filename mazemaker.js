@@ -2,6 +2,7 @@ var maze = buildMaze();
 var cursorCell;
 var startingCursor=false;
 var timer=null;
+var running = false;
 
 function Cell(x, y) {
 	this.xPos = x;
@@ -59,20 +60,6 @@ function drawMaze() {
 }
 
 
-/*
- * Event driven function that can be bound
- * to a listener to display the position
-
-function displayCursorPosition(e) {
-        var parentPosition=getPosition(e.currentTarget);
-	var xPos=e.clientX - parentPosition.x;
-	var yPos=e.clientY - parentPosition.y;
-	xPos-=xPos%10
-	yPos-=yPos%10
-	var posMessage = "X: "+xPos+" Y: "+yPos;
-	var text=document.getElementById("pos").innerText=posMessage;
-}
- */
  /*
  * Accepts the determines the position of a square in the maze
  * relative to the starting position of the canvas element
@@ -117,12 +104,6 @@ function drawStartingCursor(e) {
 		startingCursor=true;
 	}
 }
-/*
- * Redraws the selected cell as white
- */
-function removeCursor(cell) {
-}
-
 
 /*
  * Event driven function that clears the maze and
@@ -130,7 +111,8 @@ function removeCursor(cell) {
  */
 function clearMaze(e) {
 	console.log("Enter clearMaze");
-    if(timer!==null) {
+    if(running) {
+        running=false;
         clearInterval(timer);
     }
 	var canvas = document.getElementById("maze");
@@ -224,8 +206,13 @@ function hasUnvisitedNeighbors(cell) {
  * bound to run button
   */
 function dfs(e) {
-	timer = setInterval(stepDFS, 3);
-	return timer;
+    if(!running) {
+        running=true;
+	    timer = setInterval(stepDFS, 3);
+	    return timer;
+    } else {
+        console.log("Already running");
+    }
 
 }
 

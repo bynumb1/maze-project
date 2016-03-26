@@ -2,12 +2,23 @@
 html, body{
 	margin: 0px;
 	padding: 0px;
-	font: Verdana, Arial, 'sans-serif' !important;
+	font: Georgia, "Times New Roman", Times, serif !important;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+h3{
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+
+.button_font {
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+    font-size: .9em;
+    font-weight:300;
 }
 
 #banner{
 	height:40px;
-	background-color:#0066FF;
 	margin:0px;
 	padding:0px;
 	dispaly:inline;
